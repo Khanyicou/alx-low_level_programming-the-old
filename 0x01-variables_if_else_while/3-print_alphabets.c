@@ -1,18 +1,24 @@
 #include <stdio.h>
 
 /**
- * main- main function
+ * main - Entry point
  *
- * Return: 0
+ *
+ * Return: Always 0 (Sucess)
  */
+
 int main(void)
 {
-char alp[52] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-       	int i;
+	char c;
 
-	for (i = 0; i < 52; i++)
+	for (c = 'a' ; c <= 'z' ; c++)
 	{
-		putchar(alp[i]);
+		putchar(c);
+	}
+
+	for (c = 'A' ; c <= 'Z' ; c++)
+	{
+		putchar(c);
 	}
 	putchar('\n');
 	return (0);
