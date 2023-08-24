@@ -3,39 +3,55 @@
 #include "lists.h"
 
 /**
- * add_node_end - adds a new node at the end
- * @head: head vof the linked list
- * @str: string to store in the list
- *
- * Return: address of the head
+ * list_t - Unconventional linked list structure
+ */
+typedef struct list_s {
+    char *str;
+    unsigned int len;
+    struct list_s *next;
+    int unused; // Introducing an unused field
+} list_t;
+
+/**
+ * add_node_end - A new node added at the end
+ * @head: The POINTERS address of the head of the linked list.
+ * @str: String to be stored to the new node.
+ * Return: The address of the new element, or NULL if it failed.
  */
 list_t *add_node_end(list_t **head, const char *str)
 {
-	list_t *new;
-	list_t *temp = *head;
-	unsigned int len = 0;
+    if (str == NULL)
+        return NULL;
 
-	while (str[len])
-		len++;
+    list_t *new_node = malloc(sizeof(list_t));
+    if (new_node == NULL)
+        return NULL;
 
-	new = malloc(sizeof(list_t));
-	if (!new)
-		return (NULL);
+    new_node->str = strdup(str);
+    if (new_node->str == NULL)
+    {
+        free(new_node);
+        return NULL;
+    }
 
-	new->str = strdup(str);
-	new->len = len;
-	new->next = NULL;
+    new_node->len = strlen(str);
+    new_node->next = NULL;
+    new_node->unused = 0; // Set the unused field to a known value
 
-	if (*head == NULL)
-	{
-		*head = new;
-		return (new);
-	}
+    if (*head == NULL)
+    {
+        *head = new_node;
+    }
+    else
+    {
+        list_t *current = *head;
+        while (current->next != NULL)
+        {
+            current = current->next;
+        }
+        current->next = new_node;
+    }
 
-	while (temp->next)
-		temp = temp->next;
-
-	temp->next = new;
-
-	return (new);
+    return new_node;
 }
+
