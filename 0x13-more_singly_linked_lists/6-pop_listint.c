@@ -16,9 +16,9 @@ if (*head == NULL)
 return (0);
 
 temp = *head;
+*head = (*head)->next;
 data = temp->n;
 free(temp);
 
-*head = (*head)->next;
 return (data);
 }
