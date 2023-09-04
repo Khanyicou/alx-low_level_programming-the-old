@@ -7,7 +7,7 @@
 /**
  * error_exit - Print an error message and exit with a specific code.
  * @exit_code: The exit code.
- * @format: The error message format.
+ * @format: The error message
  * @...: The error message arguments.
  */
 void error_exit(int exit_code, const char *format, ...)
