@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdarg.h>
+#include "main.h"
 
 /**
  * error_exit - Print an error message and exit with a specific code.
