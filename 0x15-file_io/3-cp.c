@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "main.h"
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdarg.h>
 
 /**
  * error_exit - Print an error message and exit with a specific code.
@@ -13,7 +16,7 @@ void error_exit(int exit_code, const char *format, ...)
 va_list args;
 
 va_start(args, format);
-dprintf(STDERR_FILENO, format, args);
+vdprintf(STDERR_FILENO, format, args);
 va_end(args);
 exit(exit_code);
 }
