@@ -14,7 +14,7 @@ header->e_ident[8], header->e_ident[9], header->e_ident[10], header->e_ident[11]
 header->e_ident[12], header->e_ident[13], header->e_ident[14], header->e_ident[15]);
 
 printf("  Class:                             ");
-switch (header->e_ident[EI_CLASS]) 
+switch (header->e_ident[EI_CLASS])
 {
 case ELFCLASS32:
 printf("ELF32\n");
@@ -27,7 +27,7 @@ printf("<unknown: %x>\n", header->e_ident[EI_CLASS]);
 }
 
 printf("  Data:                              ");
-switch (header->e_ident[EI_DATA]) 
+switch (header->e_ident[EI_DATA])
 {
 case ELFDATA2LSB:
 printf("2's complement, little endian\n");
@@ -41,7 +41,7 @@ printf("<unknown: %x>\n", header->e_ident[EI_DATA]);
 
 printf("  Version:                           %d (current)\n", header->e_ident[EI_VERSION]);
 printf("  OS/ABI:                            ");
-switch (header->e_ident[EI_OSABI]) 
+switch (header->e_ident[EI_OSABI])
 {
 case ELFOSABI_SYSV:
 printf("UNIX - System V\n");
@@ -80,7 +80,7 @@ printf("<unknown: %x>\n", header->e_ident[EI_OSABI]);
 printf("  ABI Version:                       %d\n", header->e_ident[EI_ABIVERSION]);
 
 printf("  Type:                              ");
-switch (header->e_type) 
+switch (header->e_type)
 {
 case ET_NONE:
 printf("NONE (Unknown)\n");
@@ -104,16 +104,17 @@ printf("Unknown (%#x)\n", header->e_type);
 printf("  Entry point address:               0x%lx\n", header->e_entry);
 }
 
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
-if (argc != 2) 
+if (argc != 2)
 {
 dprintf(STDERR_FILENO, "Usage: %s elf_filename\n", argv[0]);
 return (EXIT_FAILURE);
 }
 
 int fd = open(argv[1], O_RDONLY);
-if (fd == -1) {
+if (fd == -1)
+{
 dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
 return (EXIT_FAILURE);
 }
@@ -125,12 +126,13 @@ if (bytes_read == sizeof(header) &&
 header.e_ident[EI_MAG0] == ELFMAG0 &&
 header.e_ident[EI_MAG1] == ELFMAG1 &&
 header.e_ident[EI_MAG2] == ELFMAG2 &&
-header.e_ident[EI_MAG3] == ELFMAG3) 
+header.e_ident[EI_MAG3] == ELFMAG3)
 {
 print_elf_header(&header);
 close(fd);
 return (EXIT_SUCCESS);
-} else {
+} else
+{
 dprintf(STDERR_FILENO, "Error: Not an ELF file: %s\n", argv[1]);
 close(fd);
 return (98);
