@@ -4,10 +4,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-void print_elf_header(Elf64_Ehdr *header) 
+void print_elf_header(Elf64_Ehdr *header)
 {
 printf("ELF Header:\n");
-printf("  Magic:   %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
+printf("Magic:%02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
 header->e_ident[0], header->e_ident[1], header->e_ident[2], header->e_ident[3],
 header->e_ident[4], header->e_ident[5], header->e_ident[6], header->e_ident[7],
 header->e_ident[8], header->e_ident[9], header->e_ident[10], header->e_ident[11],
@@ -28,7 +28,7 @@ printf("<unknown: %x>\n", header->e_ident[EI_CLASS]);
 
 printf("  Data:                              ");
 switch (header->e_ident[EI_DATA])
-{
+}
 case ELFDATA2LSB:
 printf("2's complement, little endian\n");
 break;
@@ -39,7 +39,7 @@ default:
 printf("<unknown: %x>\n", header->e_ident[EI_DATA]);
 }
 
-printf("  Version:                           %d (current)\n", header->e_ident[EI_VERSION]);
+printf("  Version: %d (current)\n", header->e_ident[EI_VERSION]);
 printf("  OS/ABI:                            ");
 switch (header->e_ident[EI_OSABI])
 {
@@ -61,9 +61,6 @@ break;
 case ELFOSABI_IRIX:
 printf("UNIX - IRIX\n");
 break;
-case ELFOSABI_FREEBSD:
-printf("UNIX - FreeBSD\n");
-break;
 case ELFOSABI_TRU64:
 printf("UNIX - TRU64\n");
 break;
@@ -77,7 +74,7 @@ default:
 printf("<unknown: %x>\n", header->e_ident[EI_OSABI]);
 }
 
-printf("  ABI Version:                       %d\n", header->e_ident[EI_ABIVERSION]);
+printf("  ABI Version:                  nt[EI_ABIVERSION])
 
 printf("  Type:                              ");
 switch (header->e_type)
@@ -131,10 +128,12 @@ header.e_ident[EI_MAG3] == ELFMAG3)
 print_elf_header(&header);
 close(fd);
 return (EXIT_SUCCESS);
-} else
+}
+else
 {
 dprintf(STDERR_FILENO, "Error: Not an ELF file: %s\n", argv[1]);
 close(fd);
-return (98);
+return (EXIT_FAILURE);
 }
 }
+
